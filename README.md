@@ -1,10 +1,11 @@
-# How to build it?
+# Tip command
 ```bash
-# Init VM
+# Init docker vm
 docker machine init
 docker machine start
 
-# Build on local
+# Build image
+docker build -t enable-ssh-on-web-container .
 docker build -t enable-ssh-on-web-container . --no-cache
 docker build -t auoplatform.azurecr.io/enable-ssh-on-web-container . --no-cache
 docker exec -it enable-ssh-on-web-container bash
@@ -14,5 +15,11 @@ docker tag enable-ssh-on-web-container auoplatform.azurecr.io/enable-ssh-on-web-
 docker images
 docker push auoplatform.azurecr.io/enable-ssh-on-web-container:latest
 
+# Run image
+docker run -d --name enable-ssh-on-web-container -p 8080:80 localhost/enable-ssh-on-web-container
+curl http://localhost:8080
+
+# Delete container
 docker stop enable-ssh-on-web-container
+docker rm enable-ssh-on-web-container
 ```
