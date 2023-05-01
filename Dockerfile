@@ -15,9 +15,6 @@ RUN apk update \
     && apk add dialog \
     && apk add openssh \
     && apk add openrc
-    # && apk add python3 \
-    # && apk add py3-pip \
-    # && apk add gunicorn \
 
 # Start and enable SSH
 RUN echo "root:Docker!" | chpasswd \

@@ -27,3 +27,15 @@ docker logs enable-ssh-on-web-container
 docker stop enable-ssh-on-web-container
 docker rm enable-ssh-on-web-container
 ```
+
+# Check list
+- `ps -a`
+    ```
+    ea6d2dab37e3:~# netstat -nlt
+    Active Internet connections (only servers)
+    Proto Recv-Q Send-Q Local Address           Foreign Address         State
+    tcp        0      0 0.0.0.0:2222            0.0.0.0:*               LISTEN
+    tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN
+    tcp        0      0 127.0.0.11:53           0.0.0.0:*               LISTEN
+    tcp        0      0 :::80                   :::*                    LISTEN
+    ```
