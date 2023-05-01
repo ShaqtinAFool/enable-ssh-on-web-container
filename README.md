@@ -17,7 +17,11 @@ docker push auoplatform.azurecr.io/enable-ssh-on-web-container:latest
 
 # Run image
 docker run -d --name enable-ssh-on-web-container -p 8080:80 localhost/enable-ssh-on-web-container
+docker run --name enable-ssh-on-web-container -p 8080:80 localhost/enable-ssh-on-web-container
 curl http://localhost:8080
+
+# Diag
+docker logs enable-ssh-on-web-container
 
 # Delete container
 docker stop enable-ssh-on-web-container

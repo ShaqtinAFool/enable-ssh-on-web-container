@@ -1,26 +1,30 @@
 FROM nginx:1.23.4-alpine
 LABEL maintainer="tony"
 
+# Initial
 COPY index.html /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY entrypoint.sh /
-COPY sshd_config /etc/ssh/
+COPY entrypoint.sh /root
+RUN chmod +x /root/entrypoint.sh
 
-# Start and enable SSH
+# Install package
 RUN apk update \
     && apk add vim \
     && apk add bash \
     && apk add busybox-extras \
     && apk add dialog \
     && apk add openssh \
-    && apk add python3 \
-    && apk add py3-pip \
-    && apk add openrc \
+    && apk add openrc
+    # && apk add python3 \
+    # && apk add py3-pip \
     # && apk add gunicorn \
-    && echo "root:Docker!" | chpasswd \
-    && chmod +x entrypoint.sh \
+
+# Start and enable SSH
+RUN echo "root:Docker!" | chpasswd \
     && cd /etc/ssh/ \
     && ssh-keygen -A
+COPY sshd_config /etc/ssh/
 
-ENTRYPOINT ["/entrypoint.sh"]
 EXPOSE 2222
+
+ENTRYPOINT ["/root/entrypoint.sh"]
